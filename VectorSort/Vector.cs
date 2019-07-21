@@ -170,10 +170,12 @@ namespace Vector
             stringData += string.Format("{0}", data[i]);
             return stringData;
         }
+        //Applies the 'Introspective Sort' of the static Array.Sort method, to sort the elements in the data structure
         public void Sort()
         {
             Array.Sort(data, 0, Count);
         }
+        //Sorts the element in the data structure using 'comparer', again applying the Introspective Sort.
         public void Sort(IComparer<T> comparer)
         {
             Array.Sort(data, 0, Count, comparer);

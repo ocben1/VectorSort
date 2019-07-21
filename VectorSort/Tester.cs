@@ -37,15 +37,24 @@ namespace Vector
         {
             return Id + "[" + Name + "]";
         }
-        public int CompareTo(Student checkname)
+        //compares this (current) element to another
+        //element and returns an integer value that is
+        //less than zero, when the current instance precedes the object specified by the CompareTo method in
+        //the sort order;
+        //zero, when this current instance occurs in the same position in the sort order as the object specified
+        //by the CompareTo method;
+        //greater than zero, when this current instance follows the object specified by the CompareTo method
+        //in the sort order.
+        public int CompareTo(Student otherStudent) //needs tweaking, names no longer appearing in order.
         {
             string A = Name;
-            string B = checkname.Name;
+            string B = otherStudent.Name;
             int count = 0;
             if (A == B)
             {
                 return 0;
             }
+            //determine how number of characters in each name. The longest name will be the Count used for iteration
             if (A.Length > B.Length)
             {
                 count = A.Length;
@@ -56,14 +65,25 @@ namespace Vector
             }
             for (int i = 0; i < count; i++)
             {
-                if ((int)A[i] < (int)B[i])
+                //current instance precedes the object specified by the CompareTo method in the sort order.
+                //Consider A = 'Andy', B = 'Bob'
+                //i.e. If the 'A' in Andy occurs alphabetically before the 'B' in Bob, return -1.
+                if (A[i] < B[i])
                 {
                     return -1;
                 }
-                else if ((int)A[i] == (int)B[i])
+                //current instance occurs in the same position in the sort order as the object specified
+                //by the CompareTo method;
+                //Consider A = 'Andy', B = 'Alice'
+                //i.e. If the 'A' in Andy occurs in the same position in the alphabet as the 'A' in Alice, return 0.
+                //Note: Since both names start with A, the next occurence (character) of each name will be used for comparison.
+                else if (A[i] == B[i])
                 {
                     return 0;
                 }
+                //current instance FOLLOWS the object specified by the CompareTo method in the sort order.
+                //Consider A = 'Chris', B = 'Bob'
+                //i.e. If the 'C' in Chris follows the 'B' in Bob in the alphabet, so return 1.
                 else
                 {
                     return 1;
@@ -73,7 +93,7 @@ namespace Vector
         }
 
     }
-
+    //sorts a vector of students in ascending order of IDs
     public class AscendingIDComparer : IComparer<Student>
     {
         public int Compare(Student A, Student B)
@@ -81,16 +101,20 @@ namespace Vector
             return A.Id - B.Id;
         }
     }
-
+    //sorts a vector of students in descending order of names (compareTo),
+    //breaking ties by descending order of ids.
     public class DescendingNameDescendingIdComparer : IComparer<Student>
     {
         public int Compare(Student A, Student B)
         {
-            return B.Id - A.Id;
+            if (A.Name.Equals(B.Name))
+            {
+                return B.Id - A.Id;
+            }
+            return B.Name.CompareTo(A.Name);
         }
     }
 
-    // 
     class Tester
     {
         private static bool CheckIntSequence(int[] certificate, Vector<int> vector)
