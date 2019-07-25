@@ -45,59 +45,8 @@ namespace Vector
         {
         // A null value means that this object is greater.
         if (otherStudent == null) return 1;
-        else if ( this.Id == otherStudent.Id) return 0;
-        else if ( this.Id > otherStudent.Id) return 1;
-        else return -1;
 
-        //This else block could be used in place of lines 48-50.
-        // else  return this.Id.CompareTo(otherStudent.Id);
-
-        //These blocks sorts the Students alphabetically. 
-        //      string A = Name;
-        //      string B = otherStudent.Name;
-        //      int count = 0;
-        //      if (A == B)
-        //      {
-        //          return 0;
-        //      }
-        //      //determine how number of characters in each name. The longest name will be the Count used for iteration
-        //      if (A.Length > B.Length)
-        //      {
-        //          count = A.Length;
-        //      }
-        //      else
-        //      {
-        //          count = B.Length;
-        //      }
-        //      for (int i = 0; i < count; i++)
-        //      {
-        //          //current instance precedes the object specified by the CompareTo method in the sort order.
-        //          //Consider A = 'Andy', B = 'Bob'
-        //          //i.e. If the 'A' in Andy occurs alphabetically before the 'B' in Bob, return -1.
-        //          if (A[i] < B[i])
-        //          {
-        //              return -1;
-        //          }
-        //          //current instance occurs in the same position in the sort order as the object specified
-        //        //by the CompareTo method;
-        //        //Consider A = 'Andy', B = 'Alice'
-        //        //i.e. If the 'A' in Andy occurs in the same position in the alphabet as the 'A' in Alice, return 0.
-        //        //Note: Since both names start with A, the next occurence (character) of each name will be used for comparison.
-        //        else if (A[i] == B[i])
-        //        {
-        //            return 0;
-        //        }
-        //        //current instance FOLLOWS the object specified by the CompareTo method in the sort order.
-        //        //Consider A = 'Chris', B = 'Bob'
-        //        //i.e. If the 'C' in Chris follows the 'B' in Bob in the alphabet, so return 1.
-        //        else
-        //        {
-        //            return 1;
-        //        }
-        //    }
-        //    return 0;
-        
-
+        return this.Id.CompareTo(otherStudent.Id);
         }
         //sorts a vector of students in ascending order of IDs
         public class AscendingIDComparer : IComparer<Student>
